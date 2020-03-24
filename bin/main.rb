@@ -1,4 +1,7 @@
 #!/usr/bin/env ruby
+
+# rubocop:disable Style/MixinUsage
+
 # require 'colorize'  # Need to run 'gem install colorize'
 
 # self customized libary
