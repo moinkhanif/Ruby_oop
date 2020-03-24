@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/MethodLength, Style/GuardClause
 module Interface
   def show(positions)
     puts "\t  #{positions[6]} | #{positions[7]} | #{positions[8]}"
