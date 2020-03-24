@@ -1,4 +1,4 @@
-# rubocop:disable Metrics/MethodLength, Style/GuardClause
+# rubocop:disable Style/GuardClause, Lint/MissingCopEnableDirective
 module Interface
   def show(positions)
     puts "\t  #{positions[6]} | #{positions[7]} | #{positions[8]}"

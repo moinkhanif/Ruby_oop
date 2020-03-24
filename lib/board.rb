@@ -1,3 +1,4 @@
+# rubocop:disable Style/GuardClause, Lint/MissingCopEnableDirective
 class Board
   include Interface
 

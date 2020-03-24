@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-# rubocop:disable Style/MixinUsage
+# rubocop:disable Style/MixinUsage, Lint/MissingCopEnableDirective
 
 # require 'colorize'  # Need to run 'gem install colorize'
 
