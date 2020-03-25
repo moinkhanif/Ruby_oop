@@ -1,8 +1,8 @@
 # rubocop:disable Style/GuardClause, Lint/MissingCopEnableDirective
 class Board
   include Interface
-
-  attr_accessor :positions
+  attr_reader :positions
+  attr_writer :positions
 
   def initialize()
     @positions = [1, 2, 3, 4, 5, 6, 7, 8, 9]
