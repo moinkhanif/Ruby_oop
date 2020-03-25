@@ -23,7 +23,7 @@ module Interface
       'taken' => "Try again, that spot has been taken already.\n",
       'valid' => "Please enter an valid number, thanks! \n",
       'win' => "Congratulations! You won!\n",
-      'full' => "Game board is full!\n",
+      'draw' => "Game board is full! Its a draw!\n",
       'name' => 'Please input your name for',
       'welcome' => "Welcome to the Tic-Tac-Toe Game, there will be 2 players to join this game! \n",
       'finish' => "Thanks for your time! \n",
@@ -111,9 +111,9 @@ class Board
     @positions[input - 1] = char
   end
 
-  def full?
+  def draw?
     if @positions.all? { |x| x.instance_of?(String) }
-      get_input('full')
+      get_input('draw')
       true
     end
   end
@@ -165,7 +165,7 @@ class Game
   private
 
   def game_finish?
-    @board.win?(@player1, @board) || @board.win?(@player2, @board) || @board.full?
+    @board.win?(@player1, @board) || @board.win?(@player2, @board) || @board.draw?
   end
 end
 include Interface
