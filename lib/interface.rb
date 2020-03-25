@@ -14,7 +14,7 @@ module Interface
       'position' => "Please enter your position (1 - 9) or press 'q' to exit game: \n",
       'play?' => "Would you like to play again?(y/n)?\n",
       'taken' => "Try again, that spot has been taken already.\n",
-      'valid' => "Please enter an valid number, thanks! \n",
+      'invalid' => "Please enter an valid number, thanks! \n",
       'win' => "Congratulations! You won!\n",
       'full' => "Game board is full!\n",
       'name' => 'Please input your name for',
@@ -66,7 +66,7 @@ module Interface
         end
       else
         get_input('quit') if input == 'q'
-        get_input('valid')
+        get_input('invalid')
       end
       show(@board.positions)
     end
