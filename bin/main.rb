@@ -1,3 +1,185 @@
 #!/usr/bin/env ruby
 
-puts 'Hello World!'
+# rubocop:disable Lint/MissingCopEnableDirective, Style/GuardClause, Metrics/MethodLength, Style/MixinUsage
+
+# require 'colorize'  # Need to run 'gem install colorize'
+
+# self customized libary
+
+module Interface
+  def show(positions)
+    puts "\t  #{positions[6]} | #{positions[7]} | #{positions[8]}"
+    puts "\t ---|---|---"
+    puts "\t  #{positions[3]} | #{positions[4]} | #{positions[5]}"
+    puts "\t ---|---|---"
+    puts "\t  #{positions[0]} | #{positions[1]} | #{positions[2]}"
+    puts ''
+  end
+
+  def get_input(text, default = '')
+    texts = {
+      'position' => "Please enter your position (1 - 9) or press 'q' to exit game: \n",
+      'play?' => "Would you like to play again?(y/n)?\n",
+      'taken' => "Try again, that spot has been taken already.\n",
+      'invalid' => "Please enter an valid number, thanks! \n",
+      'win' => "Congratulations! You won!\n",
+      'draw' => "Game board is full! Its a draw!\n",
+      'name' => 'Please input your name for',
+      'welcome' => "Welcome to the Tic-Tac-Toe Game, there will be 2 players to join this game! \n",
+      'finish' => "Thanks for your time! \n",
+      'quit' => "Sorry to see you go, see you next time! \n"
+    }
+
+    print texts[text]
+
+    case text
+    when 'position'
+      gets.chomp
+    when 'play?'
+      input = gets.chomp
+      input == 'y'
+    when 'name'
+      print "(#{default}):"
+      gets.chomp
+    when 'finish'
+      sleep 1
+      exit
+    when 'quit'
+      exit
+    else
+      false
+    end
+  end
+
+  def valid_number?(input)
+    regex = /^[1-9]$/
+    regex.match?(input)
+  end
+
+  def next_move(player)
+    loop do
+      print "#{player.name}, "
+      input = get_input('position')
+
+      if valid_number?(input)
+        input = input.to_i
+        if @board.taken?(input)
+          get_input('taken')
+        else
+          player.move(input)
+          @board.update(input, player.char)
+          show(@board.positions)
+          break
+        end
+      else
+        get_input('quit') if input == 'q'
+        get_input('invalid')
+        sleep 1
+      end
+      show(@board.positions)
+    end
+  end
+
+  def winner_display(name, positions)
+    print "#{name}, "
+    get_input('win')
+    show(positions)
+  end
+
+  def play_again?
+    if get_input('play?')
+      @status = 'initial'
+      true
+    end
+  end
+end
+class Board
+  include Interface
+
+  attr_accessor :positions
+
+  def initialize()
+    @positions = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    @lines = [
+      [1, 2, 3], [4, 5, 6], [7, 8, 9],
+      [1, 4, 7], [2, 5, 8], [3, 6, 9],
+      [1, 5, 9], [3, 5, 7]
+    ]
+    show(@positions)
+  end
+
+  def update(input, char)
+    @positions[input - 1] = char
+  end
+
+  def draw?
+    if @positions.all? { |x| x.instance_of?(String) }
+      get_input('draw')
+      true
+    end
+  end
+
+  def win?(player, board)
+    if @lines.any? { |x| x - player.inputs == [] }
+      winner_display(player.name, board.positions)
+      true
+    end
+  end
+
+  def taken?(input)
+    @positions[input - 1] == 'X' || @positions[input - 1] == 'O'
+  end
+end
+class Player
+  include Interface
+
+  attr_reader :char
+  attr_accessor :name, :inputs
+
+  def initialize(name, char)
+    @name = get_input('name', name)
+    @inputs = []
+    @char = char
+  end
+
+  def move(input)
+    @inputs << input
+  end
+end
+class Game
+  # include Interface
+
+  def initialize(player1, player2, board)
+    @player1 = player1
+    @player2 = player2
+    @board = board
+  end
+
+  def play
+    until game_finish?
+      game_finish? ? break : next_move(@player1)
+      game_finish? ? break : next_move(@player2)
+    end
+    play_again?
+  end
+
+  private
+
+  def game_finish?
+    @board.win?(@player1, @board) || @board.win?(@player2, @board) || @board.draw?
+  end
+end
+include Interface
+loop do
+  get_input('welcome')
+
+  player1 = Player.new('player1', 'X')
+  player2 = Player.new('player2', 'O')
+  board = Board.new
+  game = Game.new(player1, player2, board)
+
+  unless game.play
+    get_input('finish')
+    break
+  end
+end
