@@ -1,12 +1,13 @@
 # rubocop:disable Style/GuardClause, Lint/MissingCopEnableDirective
 module Interface
   def show(positions)
+    puts
     puts "\t  #{positions[6]} | #{positions[7]} | #{positions[8]}"
     puts "\t ---|---|---"
     puts "\t  #{positions[3]} | #{positions[4]} | #{positions[5]}"
     puts "\t ---|---|---"
     puts "\t  #{positions[0]} | #{positions[1]} | #{positions[2]}"
-    puts ''
+    puts
   end
 
   def get_input(text, default = '')
@@ -16,7 +17,7 @@ module Interface
       'taken' => "Try again, that spot has been taken already.\n",
       'invalid' => "Please enter an valid number, thanks! \n",
       'win' => "Congratulations! You won!\n",
-      'full' => "Game board is full!\n",
+      'draw' => "Game board is full! Its a draw!\n",
       'name' => 'Please input your name for',
       'welcome' => "Welcome to the Tic-Tac-Toe Game, there will be 2 players to join this game! \n",
       'finish' => "Thanks for your time! \n",
@@ -67,6 +68,7 @@ module Interface
       else
         get_input('quit') if input == 'q'
         get_input('invalid')
+        sleep 1
       end
       show(@board.positions)
     end

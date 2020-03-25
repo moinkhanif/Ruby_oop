@@ -18,6 +18,6 @@ class Game
   private
 
   def game_finish?
-    @board.win?(@player1, @board) || @board.win?(@player2, @board) || @board.full?
+    @board.win?(@player1, @board) || @board.win?(@player2, @board) || @board.draw?
   end
 end

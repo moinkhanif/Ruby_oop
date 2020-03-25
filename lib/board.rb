@@ -18,9 +18,9 @@ class Board
     @positions[input - 1] = char
   end
 
-  def full?
+  def draw?
     if @positions.all? { |x| x.instance_of?(String) }
-      get_input('full')
+      get_input('draw')
       true
     end
   end
