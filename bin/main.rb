@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-# rubocop:disable Lint/MissingCopEnableDirective, Style/GuardClause, Metrics/MethodLength, Style/MixinUsage
+# rubocop:disable Style/MixinUsage, Lint/MissingCopEnableDirective, Style/GuardClause
 
 # require 'colorize'  # Need to run 'gem install colorize'
 
@@ -8,12 +8,13 @@
 
 module Interface
   def show(positions)
+    puts
     puts "\t  #{positions[6]} | #{positions[7]} | #{positions[8]}"
     puts "\t ---|---|---"
     puts "\t  #{positions[3]} | #{positions[4]} | #{positions[5]}"
     puts "\t ---|---|---"
-    puts "\t  #{positions[0]} | #{positions[1]} | #{positions[2]}"
-    puts ''
+    puts "\t  #{positions[0]} | #{positions[1]} | #{positions[2]}"
+    puts
   end
 
   def get_input(text, default = '')
@@ -93,83 +94,13 @@ module Interface
     end
   end
 end
-class Board
-  include Interface
 
-  attr_accessor :positions
+require_relative '../lib/board.rb'
+require_relative '../lib/player.rb'
+require_relative '../lib/game.rb'
 
-  def initialize()
-    @positions = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    @lines = [
-      [1, 2, 3], [4, 5, 6], [7, 8, 9],
-      [1, 4, 7], [2, 5, 8], [3, 6, 9],
-      [1, 5, 9], [3, 5, 7]
-    ]
-    show(@positions)
-  end
-
-  def update(input, char)
-    @positions[input - 1] = char
-  end
-
-  def draw?
-    if @positions.all? { |x| x.instance_of?(String) }
-      get_input('draw')
-      true
-    end
-  end
-
-  def win?(player, board)
-    if @lines.any? { |x| x - player.inputs == [] }
-      winner_display(player.name, board.positions)
-      true
-    end
-  end
-
-  def taken?(input)
-    @positions[input - 1] == 'X' || @positions[input - 1] == 'O'
-  end
-end
-class Player
-  include Interface
-
-  attr_reader :char
-  attr_accessor :name, :inputs
-
-  def initialize(name, char)
-    @name = get_input('name', name)
-    @inputs = []
-    @char = char
-  end
-
-  def move(input)
-    @inputs << input
-  end
-end
-class Game
-  # include Interface
-
-  def initialize(player1, player2, board)
-    @player1 = player1
-    @player2 = player2
-    @board = board
-  end
-
-  def play
-    until game_finish?
-      game_finish? ? break : next_move(@player1)
-      game_finish? ? break : next_move(@player2)
-    end
-    play_again?
-  end
-
-  private
-
-  def game_finish?
-    @board.win?(@player1, @board) || @board.win?(@player2, @board) || @board.draw?
-  end
-end
 include Interface
+
 loop do
   get_input('welcome')
 
