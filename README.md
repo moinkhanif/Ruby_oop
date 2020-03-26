@@ -7,7 +7,7 @@
 
 ## About the project
 
-This is a collaborative project which aims at building an interactive executable cli Tic Tac Toe game in Ruby. The objective of this project was to create the game using Object oriented concept in Ruby such as classes and methods while respecting the single responsibility rule. Instructions for this project and be found [here](https://www.theodinproject.com/courses/ruby-programming/lessons/oop). 
+This is a collaborative project which aims at building an interactive executable cli Tic Tac Toe game in Ruby. The objective of this project was to create the game using Object oriented concept in Ruby such as classes and methods while respecting the single responsibility rule. Instructions for this project and be found <a href="https://www.theodinproject.com/courses/ruby-programming/lessons/oop" target="_blank">here</a>. 
 
 ## Features
 
@@ -31,16 +31,28 @@ To be able to use our program:
 - Open your terminal in repo location.
 - run `./bin/main.rb` in the terminal.
 
+## How to Play - Game rules
+
+Tic-tac-toe or Xs and Os is a paper-and-pencil game for two players, X and O, who take turns marking the spaces in a 3×3 grid. 
+
+The player who succeeds in placing three of their marks in a **horizontal**, **vertical**, or **diagonal** row is the winner.
+
+The following example game is won by the first player, X:
+
+![Tic Tac Toe x win](./ttt1.svg)
+
+In this case, game of Tic-tac-toe was won by X. To learn more about the game click <a href="https://en.wikipedia.org/wiki/Tic-tac-toe" target="_blank">here</a>.
+
 ## Outputs
 
 Welcome message and initial prompts:
-```
+```bash
 Welcome to the Tic-Tac-Toe Game, there will be 2 players to join this game!
 Please input your name for(player1):Moin
 Please input your name for(player2):Samuel
 ```
 Resquesting players for input:
-```
+```bash
           | 7   | 8   | 9   |
           | --- | --- | --- |
           | 4   | 5   | 6   |
@@ -67,14 +79,14 @@ Samuel, Please enter your position (1 - 9) or press 'q' to exit game:
 ```
 
 Invalid input dialogue:
-```
+```bash
 Moin, Please enter your position (1 - 9) or press 'q' to exit game: 
 10
 Please enter an valid number, thanks! 
 ```
 
 Player win dialogue:
-```
+```bash
 Samuel, Congratulations! You won!
 
           | O   | 8   | 9   |
@@ -87,7 +99,7 @@ Would you like to play again?(y/n)?
 ```
 
 Draw match dialogue:
-```
+```bash
 Moin, Please enter your position (1 - 9) or press 'q' to exit game: 
 8
 
