@@ -41,7 +41,7 @@ The following example game is won by the first player, X:
 
 ![Tic Tac Toe x win](./ttt1.svg)
 
-In this case, game of Tic-tac-toe was won by X. To learn more about the game click <a href="https://en.wikipedia.org/wiki/Tic-tac-toe" [tar]>here</a>.
+In this case, game of Tic-tac-toe was won by X. To learn more about the game click <a href="https://en.wikipedia.org/wiki/Tic-tac-toe" tar>here</a>.
 
 ## Outputs
 
