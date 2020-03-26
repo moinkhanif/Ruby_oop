@@ -1,4 +1,3 @@
-# Ruby_oop
 # Tic Tac Toe - Ruby(OOP)
 
 [![Contributors][contributors-shield]][contributors-url]
